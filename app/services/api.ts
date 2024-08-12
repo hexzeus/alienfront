@@ -18,13 +18,10 @@ export const getReview = async (reviewId: number) => {
     return checkResponse(response);
 };
 
-export const createReview = async (reviewData: any) => {
+export const createReview = async (formData: FormData) => {
     const response = await fetch(`${API_URL}/reviews/`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reviewData),
+        body: formData,
     });
     return checkResponse(response);
 };

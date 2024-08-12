@@ -7,7 +7,7 @@ const ReviewForm: React.FC = () => {
     const [placeName, setPlaceName] = useState('');
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [image, setImage] = useState<File | null>(null);  // Use File type for image
     const [cleanliness, setCleanliness] = useState(0);
     const [privacy, setPrivacy] = useState(0);
     const [accessibility, setAccessibility] = useState(0);
@@ -20,27 +20,31 @@ const ReviewForm: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const reviewData = {
-            placeName,
-            rating,
-            comment,
-            imageUrl,
-            cleanliness,
-            privacy,
-            accessibility,
-            userId,
-            locationId,
-        };
+        if (!image) {
+            setError('Please select an image.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('placeName', placeName);
+        formData.append('rating', rating.toString());
+        formData.append('comment', comment);
+        formData.append('image', image);  // Attach image as file
+        formData.append('cleanliness', cleanliness.toString());
+        formData.append('privacy', privacy.toString());
+        formData.append('accessibility', accessibility.toString());
+        formData.append('userId', userId.toString());
+        formData.append('locationId', locationId.toString());
 
         try {
-            const newReview = await createReview(reviewData);
+            const newReview = await createReview(formData);  // Send FormData
             console.log('Review created:', newReview);
             setError(null);
 
             setPlaceName('');
             setRating(0);
             setComment('');
-            setImageUrl('');
+            setImage(null);  // Reset image
             setCleanliness(0);
             setPrivacy(0);
             setAccessibility(0);
@@ -86,11 +90,10 @@ const ReviewForm: React.FC = () => {
                 />
             </div>
             <div>
-                <label className="block mb-2 text-lg font-medium">Image URL</label>
+                <label className="block mb-2 text-lg font-medium">Image</label>
                 <input
-                    type="url"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
+                    type="file"
+                    onChange={(e) => setImage(e.target.files?.[0] || null)}  // Update image state
                     className="w-full p-3 rounded-lg bg-gray-800 text-alienGreen focus:outline-none focus:ring-2 focus:ring-alienBlue"
                     required
                 />
