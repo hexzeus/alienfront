@@ -41,6 +41,7 @@ const ReviewForm: React.FC = () => {
             console.log('Review created:', newReview);
             setError(null);
 
+            // Reset form fields
             setPlaceName('');
             setRating(0);
             setComment('');
@@ -52,6 +53,24 @@ const ReviewForm: React.FC = () => {
             console.error('Failed to create review:', error);
             setError('Failed to create review. Please try again.');
         }
+    };
+
+    const renderRatingButtons = (currentRating: number, setRating: (value: number) => void) => {
+        return (
+            <div className="flex space-x-2">
+                {[1, 2, 3, 4, 5].map((value) => (
+                    <button
+                        key={value}
+                        type="button"
+                        onClick={() => setRating(value)}
+                        className={`w-10 h-10 rounded-full ${currentRating >= value ? 'bg-alienGreen' : 'bg-gray-600'
+                            } hover:bg-alienBlue`}
+                    >
+                        {value}
+                    </button>
+                ))}
+            </div>
+        );
     };
 
     return (
@@ -70,15 +89,7 @@ const ReviewForm: React.FC = () => {
             </div>
             <div>
                 <label className="block mb-2 text-lg font-medium">Rating</label>
-                <input
-                    type="number"
-                    value={rating}
-                    onChange={(e) => setRating(Number(e.target.value))}
-                    className="w-full p-3 rounded-lg bg-gray-800 text-alienGreen focus:outline-none focus:ring-2 focus:ring-alienBlue"
-                    min="1"
-                    max="5"
-                    required
-                />
+                {renderRatingButtons(rating, setRating)}
             </div>
             <div>
                 <label className="block mb-2 text-lg font-medium">Comment</label>
@@ -101,39 +112,15 @@ const ReviewForm: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <label className="block mb-2 text-lg font-medium">Cleanliness</label>
-                    <input
-                        type="number"
-                        value={cleanliness}
-                        onChange={(e) => setCleanliness(Number(e.target.value))}
-                        className="w-full p-3 rounded-lg bg-gray-800 text-alienGreen focus:outline-none focus:ring-2 focus:ring-alienBlue"
-                        min="1"
-                        max="5"
-                        required
-                    />
+                    {renderRatingButtons(cleanliness, setCleanliness)}
                 </div>
                 <div>
                     <label className="block mb-2 text-lg font-medium">Privacy</label>
-                    <input
-                        type="number"
-                        value={privacy}
-                        onChange={(e) => setPrivacy(Number(e.target.value))}
-                        className="w-full p-3 rounded-lg bg-gray-800 text-alienGreen focus:outline-none focus:ring-2 focus:ring-alienBlue"
-                        min="1"
-                        max="5"
-                        required
-                    />
+                    {renderRatingButtons(privacy, setPrivacy)}
                 </div>
                 <div>
                     <label className="block mb-2 text-lg font-medium">Accessibility</label>
-                    <input
-                        type="number"
-                        value={accessibility}
-                        onChange={(e) => setAccessibility(Number(e.target.value))}
-                        className="w-full p-3 rounded-lg bg-gray-800 text-alienGreen focus:outline-none focus:ring-2 focus:ring-alienBlue"
-                        min="1"
-                        max="5"
-                        required
-                    />
+                    {renderRatingButtons(accessibility, setAccessibility)}
                 </div>
             </div>
             <button type="submit" className="w-full py-3 mt-4 bg-alienGreen text-darkSpace rounded-lg text-lg font-semibold hover:bg-alienBlue transition-colors">
