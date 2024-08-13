@@ -1,5 +1,7 @@
 "use client";  // Ensure this is a client component
 
+import Image from "next/image";
+
 export default function Intro() {
     return (
         <div className="h-screen w-screen bg-gradient-to-r from-black to-deepSpace flex items-center justify-center relative overflow-hidden">
@@ -11,10 +13,12 @@ export default function Intro() {
             {/* Main Content */}
             <div className="relative z-10 flex flex-col items-center">
                 {/* Logo with advanced animation */}
-                <img
+                <Image
                     src="/favicon.ico"
                     alt="Brand Logo"
-                    className="w-32 h-32 animate-bounce-slow drop-shadow-alienGlow"
+                    width={128}
+                    height={128}
+                    className="animate-bounce-slow drop-shadow-alienGlow"
                 />
                 <h1 className="mt-4 text-6xl font-extrabold tracking-widest text-alienGreen animate-fadeIn">
                     Galactic Oasis

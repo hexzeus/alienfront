@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Intro from "./components/Intro";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 import "./globals.css"; // Ensure global styles are applied
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +26,7 @@ export default function ClientRootLayout({ children }: { children: React.ReactNo
             ) : (
                 <>
                     <header className="p-6 text-center bg-gradient-to-r from-alienPurple to-alienBlue shadow-lg flex items-center justify-center transition-transform duration-500 hover:scale-105">
-                        <img src="/favicon.ico" alt="Brand Logo" className="w-16 h-16 mr-4 animate-spin-slow" />
+                        <Image src="/favicon.ico" alt="Brand Logo" width={64} height={64} className="mr-4 animate-spin-slow" />
                         <h1 className="text-5xl font-extrabold tracking-tight drop-shadow-lg text-glow">
                             Galactic Oasis
                         </h1>

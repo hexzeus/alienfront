@@ -1,6 +1,6 @@
-"use client";
+"use client"; // Ensure this is a client component
 
-import React from 'react';
+import Image from "next/image";
 
 interface ReviewCardProps {
     review: {
@@ -18,7 +18,7 @@ interface ReviewCardProps {
 const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
     return (
         <div className="bg-gradient-to-b from-alienPurple to-darkSpace text-alienGreen p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
-            <img src={review.imageUrl} alt={review.placeName} className="w-full h-64 object-cover rounded-md shadow-md" />
+            <Image src={review.imageUrl} alt={review.placeName} width={640} height={360} className="w-full h-64 object-cover rounded-md shadow-md" />
             <h3 className="text-3xl mt-4 font-bold">{review.placeName}</h3>
             <p className="mt-2 text-lg">{review.comment}</p>
             <div className="mt-6 space-y-2">
