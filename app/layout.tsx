@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Alien-Themed Bathroom Review App",
+  title: "Bathroom Review App",
   description: "Explore and review bathrooms across the galaxy!",
 };
 
@@ -18,13 +18,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-darkSpace text-alienGreen`}>
         <header className="p-6 text-center bg-gradient-to-r from-alienPurple to-alienBlue shadow-md">
-          <h1 className="text-5xl font-extrabold tracking-tight">Alien-Themed Bathroom Reviews</h1>
+          <h1 className="text-5xl font-extrabold tracking-tight">Bathroom Reviews</h1>
         </header>
         <main className="min-h-screen p-6 flex justify-center items-center">
           {children}
         </main>
         <footer className="p-4 text-center bg-gradient-to-r from-alienPurple to-alienBlue shadow-md">
-          <p className="text-lg">&copy; 2024 Alien Reviews. All rights reserved.</p>
+          <p className="text-lg">&copy; 2024 Bathroom Reviews. All rights reserved.</p>
         </footer>
       </body>
     </html>
